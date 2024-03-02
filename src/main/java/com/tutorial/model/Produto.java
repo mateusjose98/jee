@@ -8,6 +8,7 @@ public class Produto {
     private String nome;
     private Double preco;
     private LocalDateTime dateTime;
+    private Categoria categoria;
 
     public Produto(Integer id, String nome, Double preco) {
         this.id = id;
@@ -50,8 +51,16 @@ public class Produto {
         this.dateTime = dateTime;
     }
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
     @Override
     public String toString() {
-        return id + "\t|\t" + nome + "\t|\t" + preco + "\t|\t" + dateTime;
+        return id + "\t|\t" + nome + "\t|\t" + preco + "\t|\t" + dateTime + "\t|\t"+ categoria.getNome();
     }
 }

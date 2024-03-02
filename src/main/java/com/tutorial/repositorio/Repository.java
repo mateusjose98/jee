@@ -1,4 +1,4 @@
-package com.tutorial;
+package com.tutorial.repositorio;
 
 import java.util.List;
 import java.util.Optional;
