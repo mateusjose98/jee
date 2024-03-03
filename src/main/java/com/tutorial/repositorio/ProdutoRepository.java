@@ -16,7 +16,7 @@ public class ProdutoRepository implements Repository<Produto> {
     }
     @Override
     public Optional<Produto> find(Integer id) {
-        try (PreparedStatement stmt = getConnection()
+        try ( Connection coon = getConnection(); PreparedStatement stmt = coon
                 .prepareStatement("select p.*, c.nome as categoria from produtos p left join categorias c on p.categoria_id = c.id WHERE p.id = ?")) {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -33,7 +33,7 @@ public class ProdutoRepository implements Repository<Produto> {
     @Override
     public List<Produto> findAll() {
         List<Produto> result = new ArrayList<>();
-        try(Statement statement = this.getConnection().createStatement();
+        try(Connection coon = getConnection(); Statement statement = coon.createStatement();
             ResultSet rs = statement.executeQuery("select p.*, c.nome as categoria from produtos p left join categorias c on p.categoria_id = c.id")){
             while(rs.next()) {
                 Produto produto = mapResultSetToProduto(rs);
@@ -67,7 +67,7 @@ public class ProdutoRepository implements Repository<Produto> {
             sql = "UPDATE produtos SET nome = ?, preco = ?, categoria_id = ?  WHERE id = ?";
         }
 
-        try (PreparedStatement stmt = getConnection().prepareStatement(sql)){
+        try (Connection coon = getConnection(); PreparedStatement stmt = coon.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
             stmt.setString(1, atualizacao.getNome());
             stmt.setDouble(2, atualizacao.getPreco());
             stmt.setInt(3, atualizacao.getCategoria().getId());
@@ -78,13 +78,18 @@ public class ProdutoRepository implements Repository<Produto> {
             }
 
             stmt.executeUpdate();
+            ResultSet generatedKeys = stmt.getGeneratedKeys();
+            generatedKeys.next();
+            System.out.println(generatedKeys.getInt(1));
         }
-        catch (Exception e){}
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void delete(Integer id) {
-        try(PreparedStatement stmt = getConnection().prepareStatement("DELETE FROM produtos WHERE id = ?")) {
+        try(Connection coon = getConnection(); PreparedStatement stmt = coon.prepareStatement("DELETE FROM produtos WHERE id = ?")) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
         } catch (Exception e) {}
