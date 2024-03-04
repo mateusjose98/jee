@@ -1,12 +1,15 @@
 package com.tutorial.model;
 
-public class Categoria {
+public class Category {
     private Integer id;
     private String nome;
 
-    public Categoria(Integer id, String nome) {
+    public Category(Integer id, String nome) {
         this.id = id;
         this.nome = nome;
+    }
+
+    public Category() {
     }
 
     public Integer getId() {

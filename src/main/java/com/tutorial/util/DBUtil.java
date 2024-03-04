@@ -5,7 +5,7 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class Conexao {
+public class DBUtil {
     private final static String URL = "jdbc:mysql://localhost:3306/db_jee?serverTimezone=UTC";
     private final static String USER = "user";
     private final static String PASSWORD = "pass";

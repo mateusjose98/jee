@@ -1,22 +1,22 @@
 package com.tutorial.model;
 
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 
-public class Produto {
+public class Product {
     private Integer id;
     private String nome;
     private Double preco;
     private LocalDateTime dateTime;
-    private Categoria categoria;
+    private Category categoria;
+    private String sku;
 
-    public Produto(Integer id, String nome, Double preco) {
+    public Product(Integer id, String nome, Double preco) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
     }
 
-    public Produto() {
+    public Product() {
     }
 
     public Integer getId() {
@@ -51,16 +51,24 @@ public class Produto {
         this.dateTime = dateTime;
     }
 
-    public Categoria getCategoria() {
+    public Category getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(Categoria categoria) {
+    public void setCategoria(Category categoria) {
         this.categoria = categoria;
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
     }
 
     @Override
     public String toString() {
-        return id + "\t|\t" + nome + "\t|\t" + preco + "\t|\t" + dateTime + "\t|\t"+ categoria.getNome();
+        return id + "\t|\t" + nome + "\t|\t" + preco + "\t|\t" + dateTime + "\t|\t"+ categoria.getNome() + "\t|\t" + sku;
     }
 }
